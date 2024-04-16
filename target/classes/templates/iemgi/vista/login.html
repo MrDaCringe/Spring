@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Formulario de Usuario</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js" 
+    integrity="sha512-zDvrqenA0eFJZCxBsryzUZcvihvNlEXbteMv62yRxdhR4s7K1aaz+LjsRyfk6M+YJLyAJEuuquIAI8I8GgLC8A==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.2.0/jsrsasign-all-min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+#nombre{
+    font-family: 'Patrick Hand', cursive;
+    font-size: 30px;
+    color: white;
+}
+#nombreicon{
+  font-size: 35px;
+  color: rgb(255, 147, 197);
+}
+.anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a{
+color: #1f2029;
+}
+.navbar-nav .nav-link {
+  color: #000000;
+ 
+}
+
+#contenedor{
+  background-color:#ffffff ;
+  color: #000000;
+  }
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #ffffff;
+	background-color: #ffffff;
+	overflow-x: hidden;
+}
+#txtmat, #txtcar, #txtnomc, #txtcon{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+.nav{
+    background-color: #2b021e;
+}
+a {
+	cursor: pointer;
+  transition: all 200ms linear;
+}
+a:hover {
+	text-decoration: none;
+}
+.link {
+  color: #c4c3ca;
+}
+.link:hover {
+  color: #ffeba7;
+}
+p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.7;
+}
+h4 {
+  font-weight: 600;
+}
+h6 span{
+  padding: 0 20px;
+  text-transform: uppercase;
+  color: black;
+  font-weight: 700;
+}
+.section{
+  position: relative;
+  width: 100%;
+  display: block;
+}
+.full-height{
+  min-height: 100vh;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked){
+  position: absolute;
+  left: -9999px;
+}
+.checkbox:checked + label,
+.checkbox:not(:checked) + label{
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 60px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: #000000;
+}
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before{
+  position: absolute;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ff55b8;
+  background-color: #ff55b8;
+  font-family: 'unicons';
+  content: '\eb4f';
+  z-index: 20;
+  top: -10px;
+  left: -10px;
+  line-height: 36px;
+  text-align: center;
+  /*font-size: 24px;*/
+ /* transition: all 0.5s ease;*/
+}
+.checkbox:checked + label:before {
+  transform: translateX(44px) rotate(-270deg);
+}
+
+
+.card-3d-wrap {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  margin-top: 60px;
+}
+.card-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position:absolute;    
+  top: 0;
+  left: 0;  
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all 600ms ease-out; 
+}
+.card-front, .card-back {/*Esto es para el contenedor*/
+  width: 100%;
+  height: 100%;
+  background-color: #18a7ef;
+  background: linear-gradient(to right, #ff8ed0, #aae0f3);
+  /*background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');*/
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: 300%;
+  position: absolute;
+  border-radius: 6px;
+  left: 0;
+  top: 0;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+.center-wrap{
+  position: absolute;
+  width: 100%;
+  padding: 0 35px;
+  top: 50%;
+  left: 0;
+  transform: translate3d(0, -50%, 35px) perspective(100px);
+  z-index: 20;
+  display: block;
+}
+
+
+.form-group{ 
+  position: relative;
+  display: block;
+    margin: 0;
+    padding: 0;
+}
+.form-style {/*cajas de texto*/
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.form-style:focus,
+.form-style:active {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: #fdfdfd;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.form-group input:-ms-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-moz-placeholder  {
+  color: #524988;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:-moz-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-webkit-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-ms-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-webkit-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.btn{  /*botones*/
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn:active,
+.btn:focus{  
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.btn:hover{  
+  background-color: #000000;
+  color: #fdfdfd;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+#actualizar{
+  background-color: #f600a8;
+  color: #fdfdfd;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  
+}
+#abrir{
+  background-color: #000000;
+  color: #fdfdfd;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  
+}
+.logo {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	display: block;
+	z-index: 100;
+	transition: all 250ms linear;
+}
+.logo img {
+	height: 26px;
+	width: auto;
+	display: block;
+}
+    </style>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+		<img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-penguin-animal-flaticons-lineal-color-flat-icons-2.png" alt="external-penguin-animal-flaticons-lineal-color-flat-icons-2"/>
+		 
+		<div class="container-fluid">
+			 <a class="navbar-brand anton-regular" id="nombreicon" href="index.html">IEMGI</a>
+		</div>
+	  </nav>
+
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Iniciar sesion </span><span>Registrarse</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+                  
+						
+			        <label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<form method="post" th:action="@{/iemgi/vista/login}" onsubmit="return validarCaptcha() && enviarFormulario()">
+                  <div class="card-front">
+                      <div class="center-wrap">
+                          <div class="section text-center">
+                              <h4 class="mb-4 pb-3">Iniciar sesión</h4>
+                              <div class="form-group">
+                                  <input type="text" name="matricula" class="form-style" placeholder="Matricula" id="loginicio" autocomplete="off">
+                                  <i class="input-icon ri-user-heart-line"></i>
+                              </div>    
+                              <div class="form-group mt-2">
+                                  <input type="password" name="contrasena" class="form-style" placeholder="Contraseña" id="locon" autocomplete="off">
+                                  <i class="input-icon ri-lock-2-line"></i>
+                              </div>
+                              
+                              <div class="form-group mt-2 ">
+                                
+                                  <input type="text" name="captchaRespuesta" class="form-style" placeholder="Ingrese el Captcha" id="captcha" autocomplete="off" required>
+                                  <i class="input-icon ri-shield-line"></i>
+                                  
+                              </div><br>
+                              <div style="background-color: palevioletred; border: 2px ;">
+                                <span id="captchaGenerated"></span>
+                              </div>
+                              <button type="button" class="btn mt-4" onclick="Captcha()">Generar Captcha</button>
+                              <button type="submit" class="btn mt-4" name="iniciar" id="iniciar" onclick=" return Token()">Iniciar</button>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+
+              <script>
+                var publicKeyPEM = "-----BEGIN PUBLIC KEY-----\nMIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgHinNEk0hXs9yDMPcbg2slbCM+iH0Rh+V6RTLnpSq+lflt1Py57u2Wcq07gAE5Rp7qkZJUHae99alB7aEdu3CcMjqDiYag8h1te6c5M2DkQLoPcJP0H/vWKPpgCGkqIlHhGMgOhFp5Oo6viMTjPhO+6cIRnWM8o4X0Rf/B/J5wwJAgMBAAE=\n-----END PUBLIC KEY-----";
+                var privateKeyPEM = "-----BEGIN RSA PRIVATE KEY-----\nMIICWwIBAAKBgHinNEk0hXs9yDMPcbg2slbCM+iH0Rh+V6RTLnpSq+lflt1Py57u2Wcq07gAE5Rp7qkZJUHae99alB7aEdu3CcMjqDiYag8h1te6c5M2DkQLoPcJP0H/vWKPpgCGkqIlHhGMgOhFp5Oo6viMTjPhO+6cIRnWM8o4X0Rf/B/J5wwJAgMBAAECgYAXU8ShLr1sEYrmjGLhSfn7GjstBy1fPfY1+DsxPVCto2Soz2fAB9ASyU378k/WzxBss0bnz5VJntqqiGERiPci9QLxwhNz/CkGE9AHKL2JIITVCDRTEDafrGQolpivpw+e62I5FeqYYk03PcIglTzpwrLzmO+efy+QxOXja52IvQJBANkg541ydbDBW4zSEj/Qnmiylz/0VOkMQLBY2mEe9Oqu/iMz1Vdznn5QVXdsSsixH/Vj5pk1tRNBCrB5BjPk7hsCQQCOQMpYTWckfemqOXSpnVquEG0j4ORj5XEXIJm3Rqhx8qmQg26xRnpzpfCp+koWBuXaWEwcdddD6DjT4rJvtACrAkEAlbli8t7i2Sf8gXa6rtak5X2BXtCVXL7ePLyImkBGky5ogM3VZ6CKwn+S7+71Ar9hUk25Th0C6GwJevd5l39d0QJAFgFby9EddX2s2dJNg7d9wZN07qnparKhjexTGxDpGcdqB5rtUqsOYjl3QzQepc2nXOFv1K89/5k6wTw+Uh1MRQJAVHtvJ7s4wiuEsjodrWY4JdkoIRR/NaMRjNFMKJaf5wLrEoJuCfHgB68zSLMvsO/JRQxCDUdAJQbzFgo+N4PA6Q==\n-----END RSA PRIVATE KEY-----";
+        
+                function encriptarConClavePublica(data) {
+                    var publicKey = KEYUTIL.getKey(publicKeyPEM);
+                    var encryptedData = new RSAKey();
+                    encryptedData = publicKey.encrypt(data);
+                    return encryptedData;
+                }
+                function enviarFormulario() {
+                    var matricula = document.getElementById("loginicio").value;
+                    var contrasena = document.getElementById("locon").value;
+                    var captcha = document.getElementById("captcha").value;
+                    
+          
+                    var matriculaEncriptada = encriptarConClavePublica(matricula);
+                    var contrasenaEncriptada = encriptarConClavePublica(contrasena);
+                    console.log("Matrícula encriptada:", matriculaEncriptada);
+                    console.log("Contraseña encriptada:", contrasenaEncriptada);
+                }
+
+                function enviarRegistro() {
+                  var matricula = document.getElementById("logmat").value;
+                  var nombre = document.getElementById("logname").value;
+                  var carrera = document.getElementById("logcar").value;
+                  var contrasena = document.getElementById("logpass").value;
+
+                  var xhr = new XMLHttpRequest();
+                  xhr.open("POST", "/api/verificarMatricula", true);
+                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xhr.onreadystatechange = function () {
+                      if (xhr.readyState === XMLHttpRequest.DONE) {
+                          if (xhr.status === 200) {
+                              if (xhr.responseText === "existe") {
+                                 // alert("La matrícula ya existe");
+                                  Swal.fire({
+                                      title: "¡Incorrecto!",
+                                      text: "La matricula ya existe",
+                                      icon: "error",
+                                      confirmButtonColor: "#f7026d",
+                                  });
+                              } else {
+                                  var matriculaEncriptada = encriptarConClavePublica(matricula);
+                                  var contrasenaEncriptada = encriptarConClavePublica(contrasena);
+                                  var nombreEncriptada = encriptarConClavePublica(nombre);
+                                  var carreraEncriptada = encriptarConClavePublica(carrera);
+
+                                  console.log("Matrícula encriptada:", matriculaEncriptada);
+                                  console.log("Contraseña encriptada:", contrasenaEncriptada);
+                                  console.log("Nombre encriptado:", nombreEncriptada);
+                                  console.log("Carrera encriptada:", carreraEncriptada);
+                                  
+                                  document.getElementById("registroForm").submit();
+                              }
+                          } else {
+                              alert("Hubo un error al verificar la matrícula");
+                          }
+                      }
+                  };
+                  xhr.send("matricula=" + encodeURIComponent(matricula));
+                  return false;
+              }
+
+            </script>
+            
+
+<script>
+  var caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  function Captcha() {
+      var captcha = Array.from({ length: 6 }, () => caracteres.charAt(Math.floor(Math.random() * caracteres.length))).join('');
+      document.getElementById("captchaGenerated").textContent = captcha;
+  }
+
+  function validarCaptcha() {
+      var captchaGenerado = document.getElementById("captchaGenerated").textContent;
+      var captchaIngresado = document.getElementById("captcha").value;
+      if (captchaGenerado !== captchaIngresado) {
+          Swal.fire({
+              title: "¡Incorrecto!",
+              text: "Verifica tu CAPTCHA",
+              icon: "error",
+              confirmButtonColor: "#f7026d",
+          });
+          return false; 
+      }
+      return true; 
+  }
+
+  var contadorTokens = 0;
+  var limiteTokens = 2;
+
+  function Token() {
+      if (contadorTokens < limiteTokens) {
+          var token = "";
+          for (var i = 0; i < 32; i++) {
+              token += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+          }
+          console.log("Token generado:", token); 
+          contadorTokens++;
+          return true; 
+      } else {
+          console.log("Se ha alcanzado el límite de generación de tokens.");
+          Swal.fire({
+          title: "¡Limite de Tokens!",
+          text: "Se ha alcanzado el limite de generacion de tokens.",
+          icon: "error",
+          confirmButtonColor: "#f7026d",
+      });
+              return false; 
+
+      }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:if="${error}">
+  Swal.fire({
+      title: "¡Incorrecto!",
+      text: "Verifica tus datos",
+      icon: "error",
+      confirmButtonColor: "#f7026d",
+  }).then(function() {
+      window.location.href = "/iemgi/vista/login";
+  });
+</script>
+    <div class="card-back">
+        <div class="center-wrap">
+            <h4 class="mb-4 pb-3">Registrarse</h4>
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+              <p th:text="${error}"></p>
+          </div>
+      
+                <form id="registroForm" action="#" th:action="@{/iemgi/vista/registro}" th:object="${usuario}" method="post" onsubmit="return enviarRegistro()">
+                    <div class="form-group">
+                    <input type="text" name="logname" class="form-style" placeholder="Nombre Completo" id="logname" autocomplete="off" required th:field="*{nombre}" />
+                    <i class="input-icon ri-empathize-fill"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                    <input type="number" name="logmat" class="form-style" placeholder="Matricula" id="logmat" autocomplete="off" required th:field="*{matricula}" />
+                    <i class="input-icon ri-user-heart-line"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                    <input type="text" name="logcar" class="form-style" placeholder="Carrera" id="logcar" autocomplete="off" required th:field="*{carrera}" />
+                    <i class="input-icon ri-edit-line"></i>
+                    </div>
+                    <div class="form-group mt-2">
+                    <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off" required th:field="*{contrasena}" />
+                    <i class=" input-icon ri-lock-2-line"></i>
+                    </div>
+                    <input type="hidden" th:field="*{privilegios}" th:value="${usuario.privilegios != null ? usuario.privilegios : 'usuario'}" />
+                    
+                    <button type="submit" class="btn mt-4" name="insertar" id="insertar" onclick=" return Token()">Registrar</button>
+                </form>
+        </div>
+    </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>   
+</body>
+</html>
