@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<link rel="stylesheet" type="text/css" href="../css/estiloindex.css">
+	
+	<title>INDEX</title>
+<style>
+	#nombre{
+    font-family: 'Patrick Hand', cursive;
+    font-size: 30px;
+    color: white;
+}
+body{
+  background: linear-gradient(to right, #ff85cc, #80d9fc);
+}
+#vaciar{
+  float: right;
+  padding: 10px;
+  margin: 10px ;
+}
+#btnEliminar{
+  padding: 10px;
+}
+#nombreicon{
+  /* font-family: 'Patrick Hand', cursive;*/
+   font-size: 35px;
+   color: rgb(255, 147, 197);
+ }
+ .anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: #fdfdfd;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+a{
+color: #1f2029;
+}
+.navbar-nav .nav-link {
+  color: #000000;
+ 
+}
+
+#contenedor{
+  background-color:#ffffff ;
+  color: #000000;
+  }
+  .contenedor{
+    background-color:#ffffff ;
+    color: #000000;
+    }
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #ffffff;
+	background-color: #ffffff;
+	overflow-x: hidden;
+}
+#txtmat, #txtcar, #txtnomc, #txtcon{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+.nav{
+    background-color: #2b021e;
+}
+</style>
+</head>
+<body>
+		<nav class="navbar navbar-expand-lg bg-light">
+			<img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-penguin-animal-flaticons-lineal-color-flat-icons-2.png" alt="external-penguin-animal-flaticons-lineal-color-flat-icons-2"/>
+				 
+				<div class="container-fluid">
+					<a class="navbar-brand anton-regular" id="nombreicon" href="index">IEMGI</a>
+				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+					  <li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/iemgi/vista/index(matricula=${usuario.matricula})}">Datos y botiquin</a>
+
+					  </li>
+				
+				<li class="nav-item">
+					<div th:if="${mostrarBotonRegistro}">
+						<a href="/iemgi/vista/registros" class="nav-link active" aria-current="page">Registro</a>
+					</div>
+				</li>
+				  </div>
+				<div>
+					
+				</div>
+				</div>
+
+			</nav>
+        <div class="container p-5 my-5 border rounded" id="contenedor">
+            <h3>Datos</h3>
+			<form action="/iemgi/vista/actualizar" method="post" th:object="${usuario}" th:action="@{/iemgi/vista/actualizar}">
+			    <h5>Matricula</h5>
+				<input type="text" id="txtmat" name="matricula" th:value="*{matricula}" readonly >
+				<h5>Nombre:</h5>
+				<input type="text" id="txtnomc" name="nombre" th:value="*{nombre}">
+				<h5>Carrera</h5>
+				<input type="text" id="txtcar" name="carrera" th:value="*{carrera}">
+				<h5>Contraseña</h5>
+				<input type="password" id="txtcon" name="contrasena" th:value="*{contrasena}">
+				
+				<input type="submit" id="actualizar"  class="btn btn-info" value="Actualizar">
+			</form><br>
+			
+			<h3>Botiquin</h1>
+            <div class="d-grid gap-2 col-4 mx-auto">
+            <input href="#"class="btn btn-dark " type="button" id="abrir" name="abrir" value="Abrir botiquin">
+            </div>
+			
+      </div>
+		  
+	</body>
+</html>
